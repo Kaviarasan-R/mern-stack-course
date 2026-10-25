@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "db:push": "prisma db push",
-    "db:generate": "prisma generate"
+    "db:generate": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "devDependencies": {
     "prisma": "^7.10.1"
