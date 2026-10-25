@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  username     String     @unique
+  password     String
+  refreshToken String?
+  createdAt    DateTime   @default(now())
+  documents    Document[]
+
+  @@map("user")
+}
+
+model Document {
+  id        Int      @id @default(autoincrement())
+  filename  String
+  pages     Int
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chunks    Chunk[]
+
+  @@map("document")
+}
+
+model Chunk {
+  id         Int                         @id @default(autoincrement())
+  content    String
+  pageNumber Int?
+  vector     Unsupported("vector(768)")? // pgvector column, dimension must match GEMINI_EMBEDDING_DIMENSION
+  documentId Int
+  document   Document                    @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@map("chunk")
+}
