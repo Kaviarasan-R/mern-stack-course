@@ -20,7 +20,9 @@ app.use(express.json()); // Middleware
 app.use(express.urlencoded({ extended: true })) // Middleware
 app.use(cookieParser());
 // Allow the react app (different port) to call us AND send the refresh token cookie
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+// CLIENT_URL can be a comma-separated list; trailing slashes are stripped since browsers never send them in Origin
+const allowedOrigins = (process.env.CLIENT_URL || "").split(",").map(url => url.trim().replace(/\/+$/, "")).filter(Boolean)
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 
 app.get("/", (req, res) => {
     res.send({message: "Hello world"})
