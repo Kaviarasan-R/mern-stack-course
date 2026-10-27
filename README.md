@@ -1,5 +1,7 @@
 # MERN Full-Stack Web Development Course
 
+> **Note:** Class recordings in tamil are available here: https://drive.google.com/drive/folders/1o-JQC88FpVPIqHI47Z5w4Re2BUlEGjHY?usp=sharing
+
 ## Reference:
 - **Javascript**: https://github.com/Kaviarasan-R/javascript
 - **Typescript**: https://github.com/Kaviarasan-R/typescript
